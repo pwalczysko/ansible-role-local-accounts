@@ -11,7 +11,7 @@
         state: present
         uid: "{{ item.uid }}"
         update_password: on_create
-        groups: "{{ item.groups | default(omit) }}"
+        # groups: "{{ item.groups | default(omit) }}"
       with_items: "{{ users }}"
     - name: set authorized keys
       become: true
