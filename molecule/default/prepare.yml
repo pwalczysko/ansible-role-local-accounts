@@ -5,12 +5,13 @@
     - name: create users
       become: true
       ansible.builtin.user:
-        append: true
+        append: "{{ item.groups | default('') | length > 0 }}"
         createhome: true
         name: "{{ item.name }}"
         state: present
         uid: "{{ item.uid }}"
         update_password: on_create
+        groups: "{{ item.groups | default(omit) }}"
       with_items: "{{ users }}"
     - name: set authorized keys
       become: true
