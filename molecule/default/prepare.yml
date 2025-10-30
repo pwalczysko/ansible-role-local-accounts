@@ -15,7 +15,7 @@
     - name: set authorized keys
       become: true
       become_user: "{{ item.name }}"
-      ansible.builtin.authorized_key:
+      ansible.posix.authorized_key:
         key: "{{ item.key }}"
         manage_dir: false
         state: present
